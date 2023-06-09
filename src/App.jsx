@@ -2,12 +2,26 @@ import { useState } from "react";
 import "./App.css";
 import Header from "./components/header";
 import Home from "./components/home";
-import Button from "./components/button";
+import Button from "./components/button/button";
 import Question from "./components/question";
 import Result from "./components/result";
 
 function App() {
   const [user, setUser] = useState(null);
+  // const timeObject = new Date().setMinutes(2);
+  // console.log(timeObject);
+  // // counter timer
+
+  // const newDate = new Date();
+  // const year = newDate.getFullYear();
+  // const month = newDate.getMonth();
+  // const day = newDate.getDay();
+  // const min = newDate.getMinutes();
+  // const sec = newDate.getSeconds();
+  // // newDate.getUTCDay()
+  // const next = newDate.getDate();
+  // console.log(next);
+  // console.log(year +':'+month + ':' +day+ ':' + min +':'+ sec);
 
   return (
     <>
