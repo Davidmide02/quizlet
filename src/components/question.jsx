@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Button from "./button";
+import Button from "./button/button";
 
 const questiondb = [
   {
@@ -24,52 +24,45 @@ const questiondb = [
 // "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple"
 const Question = () => {
   const [indexNum, setIndexNum] = useState(0);
-  const [questionSource, setQuestionSource] = useState(null);
+  const [quizData, setQuizData] = useState([]);
 
-  // useEffect(() => {
-  //   fetch(
-  //     "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple"
-  //   )
-  //     .then((res) => res.json())
-  //     .then((dta) => {
-  //       console.log(dta);
-  //       setQuestionSource(dta);
-  //     });
-  // }, []);
-  // chatgpt
-  //  const [quizData, setQuizData] = useState([]);
+  useEffect(() => {
+    const fetchQuizData = async () => {
+      try {
+        const response = await fetch(
+          "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple"
+        );
+        const data = await response.json();
+        setQuizData(data);
+        console.log(quizData);
+      } catch (error) {
+        console.error("Error fetching quiz data:", error);
+      }
+    };
 
-  // useEffect(() => {
-  //   const fetchQuizData = async () => {
-  //     try {
-  //       const response = await fetch('https://api.example.com/quiz');
-  //       const data = await response.json();
-  //       setQuizData(data);
-  //     } catch (error) {
-  //       console.error('Error fetching quiz data:', error);
-  //     }
-  //   };
+    fetchQuizData();
+  }, []);
 
-  //   fetchQuizData();
-  // }, []);
-  // chat ends here
-  // console.log(questionSource);
-  // console.log(questionSource.results);
-
-  // let indexNum = 0;
-  function handleNext() {
-    // indexNum= indexNum+1
+  // function handleNext() {
+  //   if (indexNum < 2) {
+  //     setIndexNum(indexNum + 1);
+  //     console.log(indexNum);
+  //     return indexNum;
+  //   } else alert("quest over bitch!");
+  // }
+  // function handePrev() {
+  //   if (indexNum > 0) {
+  //     setIndexNum(indexNum - 1);
+  //     console.log(indexNum);
+  //   } else alert("what else");
+  // }
+  function handlemark(params) {
+    console.log(params);
     if (indexNum < 2) {
       setIndexNum(indexNum + 1);
       console.log(indexNum);
       return indexNum;
     } else alert("quest over bitch!");
-  }
-  function handePrev() {
-    if (indexNum > 0) {
-      setIndexNum(indexNum - 1);
-      console.log(indexNum);
-    } else alert("what else");
   }
   return (
     <div className="qusestion md:w-[50%] m-auto">
@@ -82,6 +75,9 @@ const Question = () => {
             className={"bg-blue-950 p-4 rounded-lg text-white"}
             Children={opt}
             key={opt}
+            handleClick={() => {
+              handlemark(opt);
+            }}
           />
         ))}
       </div>
@@ -90,21 +86,21 @@ const Question = () => {
           <Button
             className={"py-2 px-4 bg-blue-950 text-white mr-2 "}
             Children={"< prev"}
-            handleClick={handePrev}
+            // handleClick={handePrev}
           />
         )}
         {indexNum == 2 && (
           <Button
             className={"py-2 px-4 bg-blue-950 text-white mr-2 "}
             Children={"Submit"}
-            handleClick={handePrev}
+            // handleClick={handePrev}
           />
         )}
 
         <Button
           className={"py-2 px-4 bg-blue-950 text-white"}
           Children={"next >"}
-          handleClick={handleNext}
+          // handleClick={handleNext}
         />
       </div>
     </div>
