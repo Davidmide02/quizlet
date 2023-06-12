@@ -24,7 +24,7 @@ const questiondb = [
 // "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple"
 const Question = () => {
   const [indexNum, setIndexNum] = useState(0);
-  const [quizData, setQuizData] = useState([]);
+  const [quizData, setQuizData] = useState(null);
 
   useEffect(() => {
     const fetchQuizData = async () => {
@@ -35,11 +35,12 @@ const Question = () => {
         const data = await response.json();
         setQuizData(data);
         console.log(quizData);
+        // console.log(quizData.results);
       } catch (error) {
         console.error("Error fetching quiz data:", error);
       }
+      console.log("error");
     };
-
     fetchQuizData();
   }, []);
 
@@ -67,19 +68,20 @@ const Question = () => {
   return (
     <div className="qusestion md:w-[50%] m-auto">
       <div className="ques p-4 border-2 border-blue-950 rounded-lg text-2xl mb-3">
-        {questiondb[indexNum].ques}
+        {quizData ? quizData.results[indexNum].question : "hello"}
       </div>
       <div className="btn flex flex-col gap-2 mb-2">
-        {questiondb[indexNum].opts.map((opt) => (
-          <Button
-            className={"bg-blue-950 p-4 rounded-lg text-white"}
-            Children={opt}
-            key={opt}
-            handleClick={() => {
-              handlemark(opt);
-            }}
-          />
-        ))}
+        {quizData &&
+          quizData.results[indexNum].incorrect_answers.map((opt) => (
+            <Button
+              className={"bg-blue-950 p-4 rounded-lg text-white"}
+              Children={opt}
+              key={opt}
+              handleClick={() => {
+                handlemark(opt);
+              }}
+            />
+          ))}
       </div>
       <div className="next-prev flex justify-between mt-2 pt-2">
         {indexNum <= 2 && (
