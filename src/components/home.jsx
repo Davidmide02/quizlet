@@ -35,7 +35,7 @@ const Home = ({ setUser }) => {
             setUser(e.target.value);
           }}
           placeholder="Enter name..."
-          className="bg-blue-800 w-[70%] md:w-[40%] rounded-lg py-2 px-4 outline-none text-white"
+          className="bg-white w-[70%] md:w-[40%] rounded-lg py-2 px-4 outline-none text-blue-950"
         />
         <Button
           type={"submit"}

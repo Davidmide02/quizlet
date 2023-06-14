@@ -34,14 +34,12 @@ const Question = () => {
         );
         const data = await response.json();
         setQuizData(data);
-        console.log(quizData);
-        // console.log(quizData.results);
       } catch (error) {
         console.error("Error fetching quiz data:", error);
       }
-      console.log("error");
     };
     fetchQuizData();
+    console.log(quizData);
   }, []);
 
   // function handleNext() {
@@ -82,6 +80,14 @@ const Question = () => {
               }}
             />
           ))}
+        <Button
+          className={"bg-blue-950 p-4 rounded-lg text-white"}
+          Children={quizData.results[indexNum].correct_answer}
+          key={quizData.results[indexNum].correct_answers}
+          handleClick={() => {
+            handlemark(opt);
+          }}
+        />
       </div>
       <div className="next-prev flex justify-between mt-2 pt-2">
         {indexNum <= 2 && (
