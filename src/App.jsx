@@ -5,6 +5,8 @@ import Home from "./components/home";
 import Button from "./components/button/button";
 import Question from "./components/question";
 import Result from "./components/result";
+import { Routes, Route } from "react-router-dom";
+import NotFound from "./notFound";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -41,9 +43,12 @@ function App() {
             Children={"log In"}
           />
         </div>
-        <Home setUser={setUser} />
-        <Question />
-        <Result user={user} />
+        <Routes>
+          <Route path="/" element={<Home setUser={setUser} />} />
+          <Route path="/question" element={<Question />} />
+          <Route path="/result" element={<Result user={user} />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
     </>
   );
