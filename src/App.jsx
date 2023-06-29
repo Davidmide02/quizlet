@@ -29,21 +29,7 @@ function App() {
   return (
     <>
       <Header />
-      <main className="body text-center text-blue-950 font-nato p-4">
-        <div className="mt-4 md:grid md:grid-cols-2 md:item-end ">
-          <Button
-            className={
-              "border-2 border-blue-950 outline-none  py-1 px-2 rounded-lg text-blue-950 font-medium mr-2"
-            }
-            Children={"sign up"}
-          />
-          <Button
-            className={
-              "bg-blue-950 outline-none py-2 px-4 rounded-lg text-white font-medium"
-            }
-            Children={"log In"}
-          />
-        </div>
+      <main className="body h-screen text-center text-blue-950 font-nato pt-2 flex flex-col justify-center items-center">
         <Routes>
           <Route path="/" element={<Home setUser={setUser} user={user} />} />
           <Route path="/setquiz" element={<Setquiz />} />
