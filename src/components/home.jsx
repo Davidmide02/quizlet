@@ -1,9 +1,14 @@
 import Button from "./button/button";
 import person from "../assets/undraw_quiz_re_aol4.svg";
+import Setquiz from "../setquiz";
+import { Link } from "react-router-dom";
 
-const Home = ({ setUser }) => {
-  function handleSubmit(params) {
-    params.preventDefault();
+const Home = ({ setUser, user }) => {
+  function handleSubmit() {
+
+    if (!user) {
+      alert("enter your name");
+    }
   }
   return (
     <div className="home bg-blue-950 pt-2 text-white mt-2">
@@ -24,7 +29,6 @@ const Home = ({ setUser }) => {
       <form
         action=""
         className="flex flex-col gap-4 mt-2 items-center justify-center p-4"
-        onSubmit={handleSubmit}
       >
         <input
           type="text"
@@ -37,14 +41,19 @@ const Home = ({ setUser }) => {
           placeholder="Enter name..."
           className="bg-white w-[70%] md:w-[40%] rounded-lg py-2 px-4 outline-none text-blue-950"
         />
-        <Button
-          type={"submit"}
-          Children={"Get Started"}
-          className={
-            " text-lg font-bold border-2 border-white rounded-lg px-2 hover:bg-white hover:text-blue-950"
-          }
-        />
+        <Link to={!user ? "/" : "/setquiz"}>
+          <Button
+            type={"submit"}
+            Children={"Get Started"}
+            className={
+              " text-lg font-bold border-2 border-white rounded-lg px-2 hover:bg-white hover:text-blue-950"
+            }
+            handleClick={() => handleSubmit()}
+          />
+        </Link>
       </form>
+
+      <Setquiz />
     </div>
   );
 };

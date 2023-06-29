@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import Button from "./button/button";
+// https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple  general knowledge
+// https://opentdb.com/api.php?amount=10&category=31&difficulty=easy&type=multiple anime
+// https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple computer
+// https://opentdb.com/api.php?amount=10&category=17&difficulty=easy&type=multiple science
 
 const questiondb = [
   {
