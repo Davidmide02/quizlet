@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import Button from "./button/button";
+// https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple  general knowledge
+// https://opentdb.com/api.php?amount=10&category=31&difficulty=easy&type=multiple anime
+// https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple computer
+// https://opentdb.com/api.php?amount=10&category=17&difficulty=easy&type=multiple science
 
 const questiondb = [
   {
@@ -40,21 +44,10 @@ const Question = () => {
     };
     fetchQuizData();
     console.log(quizData);
-  }, []);
+  }, [quizData]);
+  // check render
 
-  // function handleNext() {
-  //   if (indexNum < 2) {
-  //     setIndexNum(indexNum + 1);
-  //     console.log(indexNum);
-  //     return indexNum;
-  //   } else alert("quest over bitch!");
-  // }
-  // function handePrev() {
-  //   if (indexNum > 0) {
-  //     setIndexNum(indexNum - 1);
-  //     console.log(indexNum);
-  //   } else alert("what else");
-  // }
+
   function handlemark(params) {
     console.log(params);
     if (indexNum < 2) {
@@ -63,14 +56,12 @@ const Question = () => {
       return indexNum;
     } else alert("quest over bitch!");
   }
-  return (
-    <div className="qusestion md:w-[50%] m-auto">
-      <div className="ques p-4 border-2 border-blue-950 rounded-lg text-2xl mb-3">
-        {quizData ? quizData.results[indexNum].question : "hello"}
-      </div>
-      <div className="btn flex flex-col gap-2 mb-2">
-        {quizData &&
-          quizData.results[indexNum].incorrect_answers.map((opt) => (
+  if (quizData !== null) {
+    return (
+      <>
+        <div>{quizData.results[indexNum].question}</div>
+        <div className="btn flex flex-col gap-2 mb-2">
+          {quizData.results[indexNum].incorrect_answers.map((opt) => (
             <Button
               className={"bg-blue-950 p-4 rounded-lg text-white"}
               Children={opt}
@@ -80,39 +71,117 @@ const Question = () => {
               }}
             />
           ))}
-        <Button
-          className={"bg-blue-950 p-4 rounded-lg text-white"}
-          Children={quizData.results[indexNum].correct_answer}
-          key={quizData.results[indexNum].correct_answers}
-          handleClick={() => {
-            handlemark(opt);
-          }}
-        />
-      </div>
-      <div className="next-prev flex justify-between mt-2 pt-2">
-        {indexNum <= 2 && (
-          <Button
-            className={"py-2 px-4 bg-blue-950 text-white mr-2 "}
-            Children={"< prev"}
-            // handleClick={handePrev}
-          />
-        )}
-        {indexNum == 2 && (
-          <Button
-            className={"py-2 px-4 bg-blue-950 text-white mr-2 "}
-            Children={"Submit"}
-            // handleClick={handePrev}
-          />
-        )}
 
-        <Button
-          className={"py-2 px-4 bg-blue-950 text-white"}
-          Children={"next >"}
-          // handleClick={handleNext}
-        />
-      </div>
-    </div>
-  );
+          <Button
+            className={"bg-blue-950 p-4 rounded-lg text-white"}
+            Children={quizData.results[indexNum].correct_answer}
+            key={quizData.results[indexNum].correct_answer}
+            handleClick={() => {
+              handlemark(opt);
+            }}
+          />
+        </div>
+        {/* here */}
+        <div className="qusestion md:w-[50%] m-auto">
+          <div className="ques p-4 border-2 border-blue-950 rounded-lg text-2xl mb-3">
+            {quizData.results[indexNum].question}
+          </div>
+          <div className="btn flex flex-col gap-2 mb-2">
+            {quizData.results[indexNum].incorrect_answers.map((opt) => (
+              <Button
+                className={"bg-blue-950 p-4 rounded-lg text-white"}
+                Children={opt}
+                key={opt}
+                handleClick={() => {
+                  handlemark(opt);
+                }}
+              />
+            ))}
+
+            <Button
+              className={"bg-blue-950 p-4 rounded-lg text-white"}
+              Children={quizData.results[indexNum].correct_answer}
+              key={quizData.results[indexNum].correct_answer}
+              handleClick={() => {
+                handlemark(opt);
+              }}
+            />
+          </div>
+          <div className="next-prev flex justify-between mt-2 pt-2">
+            {indexNum <= 2 && (
+              <Button
+                className={"py-2 px-4 bg-blue-950 text-white mr-2 "}
+                Children={"< prev"}
+              />
+            )}
+            {indexNum == 2 && (
+              <Button
+                className={"py-2 px-4 bg-blue-950 text-white mr-2 "}
+                Children={"Submit"}
+              />
+            )}
+
+            <Button
+              className={"py-2 px-4 bg-blue-950 text-white"}
+              Children={"next >"}
+            />
+          </div>
+        </div>
+        ;{/* end here */}
+      </>
+    );
+  } else {
+    return <h1>Can't fetch data</h1>;
+  }
 };
+
+// return (
+//   <div className="qusestion md:w-[50%] m-auto">
+//     <div className="ques p-4 border-2 border-blue-950 rounded-lg text-2xl mb-3">
+//       {quizData ? quizData.results[indexNum].question : "hello"}
+//     </div>
+//     <div className="btn flex flex-col gap-2 mb-2">
+//       {quizData !== null &&
+//         quizData.results[indexNum].incorrect_answers.map((opt) => (
+//           <Button
+//             className={"bg-blue-950 p-4 rounded-lg text-white"}
+//             Children={opt}
+//             key={opt}
+//             handleClick={() => {
+//               handlemark(opt);
+//             }}
+//           />
+//         ))}
+
+//       <Button
+//         className={"bg-blue-950 p-4 rounded-lg text-white"}
+//         Children={quizData.results[indexNum].correct_answer}
+//         key={quizData.results[indexNum].correct_answer}
+//         handleClick={() => {
+//           handlemark(opt);
+//         }}
+//       />
+//     </div>
+//     <div className="next-prev flex justify-between mt-2 pt-2">
+//       {indexNum <= 2 && (
+//         <Button
+//           className={"py-2 px-4 bg-blue-950 text-white mr-2 "}
+//           Children={"< prev"}
+//         />
+//       )}
+//       {indexNum == 2 && (
+//         <Button
+//           className={"py-2 px-4 bg-blue-950 text-white mr-2 "}
+//           Children={"Submit"}
+//         />
+//       )}
+
+//       <Button
+//         className={"py-2 px-4 bg-blue-950 text-white"}
+//         Children={"next >"}
+//       />
+//     </div>
+//   </div>
+// );
 
 export default Question;

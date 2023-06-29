@@ -7,6 +7,7 @@ import Question from "./components/question";
 import Result from "./components/result";
 import { Routes, Route } from "react-router-dom";
 import NotFound from "./notFound";
+import Setquiz from "./setquiz";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -44,7 +45,8 @@ function App() {
           />
         </div>
         <Routes>
-          <Route path="/" element={<Home setUser={setUser} />} />
+          <Route path="/" element={<Home setUser={setUser} user={user} />} />
+          <Route path="/setquiz" element={<Setquiz />} />
           <Route path="/question" element={<Question />} />
           <Route path="/result" element={<Result user={user} />} />
           <Route path="*" element={<NotFound />} />
