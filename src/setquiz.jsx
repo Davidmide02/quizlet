@@ -4,9 +4,13 @@ import quesIcon from "/src/assets/undraw_questions_re_1fy7.svg";
 import { useState } from "react";
 
 const Setquiz = () => {
- const [tst, settst] = useState(null)
-  
+  // const [tst, settst] = useState(null);
+
   const category = [
+    {
+      title: "",
+      qs: "",
+    },
     {
       title: "Anime",
       qs: "opentdb.com/api.php?amount=10&category=31&difficulty=easy&type=multiple",
@@ -23,7 +27,7 @@ const Setquiz = () => {
 
     {
       title: "Computer",
-      qs: "opentdb.com/api.php?amount=10&category=17&difficulty=easy&type=multiple",
+      qs: "opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple",
     },
   ];
   const timeNum = [1, 2, 3];
@@ -33,10 +37,9 @@ const Setquiz = () => {
   //   alert(x)
   // };
   function handleOpt(params) {
-    alert('okat')
+    alert("okat");
     console.log(params);
     console.log(tst);
-    
   }
 
   return (
@@ -63,18 +66,16 @@ const Setquiz = () => {
         <div className="sele flex justify-evenly gap-4 mb-2 md:justify-between">
           <div>
             <p>Categories</p>
+
             <select
               name=""
               id=""
               className="text-white bg-blue-950 outline-none p-2 font-poppin"
               placeholder="category"
+              onChange={(e) => console.log(e.target.value)}
             >
               {category.map((cate) => (
-                <option
-                  key={cate.title}
-                  className="p-2"
-                  onClick={() => console.log(cate.title)}
-                >
+                <option key={cate.title} className="p-2" value={cate.qs}>
                   {cate.title}
                 </option>
               ))}
@@ -89,7 +90,14 @@ const Setquiz = () => {
               className="text-white bg-blue-950 outline-none p-2"
             >
               {timeNum.map((num) => (
-                <option key={num} onClick={()=>{handleOpt(num)}}>{num}</option>
+                <option
+                  key={num}
+                  onClick={() => {
+                    handleOpt(num);
+                  }}
+                >
+                  {num}
+                </option>
               ))}
             </select>
           </div>
