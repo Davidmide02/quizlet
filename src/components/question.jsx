@@ -22,9 +22,17 @@ const Question = ({ questionCategory }) => {
     if (indexNum < questions.length) {
       setIndexNum(indexNum + 1);
       console.log(indexNum);
+
       return indexNum;
     } else alert("quest over bitch!");
   }
+  // merging the options
+  // const allOptions = [
+  //   ...questions[indexNum].incorrect_answers,
+  //   ...questions[indexNum].correct_answer,
+  // ];
+  // console.log(allOptions);
+
   if (questions !== null) {
     return (
       <>
