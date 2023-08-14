@@ -13,6 +13,7 @@ const App = () => {
   const [questionCategory, setQuestionCategory] = useState(
     "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple"
   );
+  const [score, setScore] = useState(0);
 
   return (
     <>
@@ -35,10 +36,15 @@ const App = () => {
               <Question
                 setQuestionCategory={setQuestionCategory}
                 questionCategory={questionCategory}
+                setScore={setScore}
+                score={score}
               />
             }
           />
-          <Route path="/result" element={<Result user={user} />} />
+          <Route
+            path="/result"
+            element={<Result user={user} score={score} />}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

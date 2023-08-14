@@ -1,9 +1,19 @@
 import { useEffect, useState } from "react";
 import Button from "./button/button";
+import { useNavigate } from "react-router-dom";
 
-const Question = ({ questionCategory }) => {
+const Question = ({ questionCategory,setScore, score }) => {
   const [indexNum, setIndexNum] = useState(0);
   const [questions, setQuestions] = useState(null);
+  const navigate = useNavigate();
+  // const [resultPage, setResultPage] = useState(false);
+  // const toResultpage = useHistory();
+
+  // programmatic navigation
+  const handleSubmit = () => {
+    // Navigate to a different route
+    // toResultpage.push("/result");
+  };
 
   //   helper function to fetch question from api
   const fetchData = async () => {
@@ -16,22 +26,33 @@ const Question = ({ questionCategory }) => {
   useEffect(() => {
     fetchData();
   }, []);
-
   function handlemark(params) {
     console.log(params);
-    if (indexNum < questions.length) {
+    if (indexNum <= questions.length - 1) {
+      // nested check
+      if (indexNum == questions.length - 1) {
+        navigate("/result");
+        return indexNum;
+      }
       setIndexNum(indexNum + 1);
-      console.log(indexNum);
+      console.log(indexNum + "" + "indexnum");
+      console.log(score + "" + "score");
+      console.log(questions.length + "" + "questionLebght");
 
       return indexNum;
-    } else alert("quest over bitch!");
+    } else {
+      // setResultPage(true);
+      navigate("/result");
+      handleSubmit();
+      alert("quest over bitch!");
+    }
   }
-  // merging the options
-  // const allOptions = [
-  //   ...questions[indexNum].incorrect_answers,
-  //   ...questions[indexNum].correct_answer,
-  // ];
-  // console.log(allOptions);
+
+  // trigger at every click of correct option
+  function markCorrect() {
+    setScore(score + 1);
+    console.log(score);
+  }
 
   if (questions !== null) {
     return (
@@ -51,15 +72,17 @@ const Question = ({ questionCategory }) => {
                 }}
               />
             ))}
-
+            {/* <Link to={!resultPage ? "/" : "/result"}> */}
             <Button
               className={"bg-blue-950 p-4 rounded-lg text-white"}
               Children={questions[indexNum].correct_answer}
               key={questions[indexNum].correct_answer}
               handleClick={() => {
                 handlemark(questions[indexNum].correct_answer);
+                markCorrect();
               }}
             />
+            {/* </Link> */}
           </div>
         </div>
         ;
