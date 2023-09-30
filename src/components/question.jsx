@@ -2,18 +2,13 @@ import { useEffect, useState } from "react";
 import Button from "./button/button";
 import { useNavigate } from "react-router-dom";
 
-const Question = ({ questionCategory,setScore, score }) => {
+const Question = ({ questionCategory, setScore, score }) => {
   const [indexNum, setIndexNum] = useState(0);
   const [questions, setQuestions] = useState(null);
   const navigate = useNavigate();
-  // const [resultPage, setResultPage] = useState(false);
-  // const toResultpage = useHistory();
 
   // programmatic navigation
-  const handleSubmit = () => {
-    // Navigate to a different route
-    // toResultpage.push("/result");
-  };
+  const handleSubmit = () => {};
 
   //   helper function to fetch question from api
   const fetchData = async () => {
@@ -26,6 +21,9 @@ const Question = ({ questionCategory,setScore, score }) => {
   useEffect(() => {
     fetchData();
   }, []);
+  const autoSubmit = () => {
+    setTimeout(() => navigate("/result"), timer * 60 * 1000);
+  };
   function handlemark(params) {
     console.log(params);
     if (indexNum <= questions.length - 1) {
@@ -37,12 +35,13 @@ const Question = ({ questionCategory,setScore, score }) => {
       setIndexNum(indexNum + 1);
       console.log(indexNum + "" + "indexnum");
       console.log(score + "" + "score");
-      console.log(questions.length + "" + "questionLebght");
+      console.log(questions.length + "" + "questionLenght");
 
       return indexNum;
     } else {
-      // setResultPage(true);
       navigate("/result");
+
+      // do the programatic navigation in the handleSubmit function ao you can call it for when the time elapses for auto submittion or when the user click submit
       handleSubmit();
       alert("quest over bitch!");
     }
@@ -57,6 +56,7 @@ const Question = ({ questionCategory,setScore, score }) => {
   if (questions !== null) {
     return (
       <>
+        <p>Left: {indexNum == 0 ? 1 : indexNum + 1}/10</p>
         <div className="qusestion md:w-[50%] m-auto pt-4">
           <div className="ques p-4 border-2 border-blue-950 rounded-lg text-2xl mb-3">
             {questions[indexNum].question}
@@ -72,7 +72,7 @@ const Question = ({ questionCategory,setScore, score }) => {
                 }}
               />
             ))}
-            {/* <Link to={!resultPage ? "/" : "/result"}> */}
+
             <Button
               className={"bg-blue-950 p-4 rounded-lg text-white"}
               Children={questions[indexNum].correct_answer}
@@ -82,7 +82,6 @@ const Question = ({ questionCategory,setScore, score }) => {
                 markCorrect();
               }}
             />
-            {/* </Link> */}
           </div>
         </div>
         ;

@@ -43,7 +43,7 @@ const App = () => {
           />
           <Route
             path="/result"
-            element={<Result user={user} score={score} />}
+            element={<Result user={user} score={score} setScore={setScore} />}
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
