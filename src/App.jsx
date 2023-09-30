@@ -14,6 +14,7 @@ const App = () => {
     "https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple"
   );
   const [score, setScore] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(20);
 
   return (
     <>
@@ -27,6 +28,8 @@ const App = () => {
               <Setquiz
                 setQuestionCategory={setQuestionCategory}
                 questionCategory={questionCategory}
+                timeLeft={timeLeft}
+                setTimeLeft={setTimeLeft}
               />
             }
           />
@@ -38,6 +41,8 @@ const App = () => {
                 questionCategory={questionCategory}
                 setScore={setScore}
                 score={score}
+                timeLeft={timeLeft}
+                setTimeLeft={setTimeLeft}
               />
             }
           />

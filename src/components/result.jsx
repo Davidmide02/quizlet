@@ -1,5 +1,7 @@
 import { useState } from "react";
 import resultImage from "../assets/undraw_result_re_uj08.svg";
+import Button from "./button/button";
+import { Link } from "react-router-dom";
 
 const Result = ({ user, score, setScore }) => {
   const [commentdb, setCommentdb] = useState(null);
@@ -11,15 +13,16 @@ const Result = ({ user, score, setScore }) => {
   ];
   const commentAverage = ["You try!", "Average!", "pass!"];
 
-  const handleClick = () => {
-    if (score >= 7) {
+  const handleComment = (param) => {
+    if (param >= 7) {
       setCommentdb(commentGood[Math.floor(Math.random() * 3)]);
-    } else if (score >= 5) {
+    } else if (param >= 5) {
       setCommentdb(commentAverage[Math.floor(Math.random() * 3)]);
     } else {
       setCommentdb(commentBad[Math.floor(Math.random() * 3)]);
     }
   };
+  // handleComment(score);
 
   return (
     <div className="result p-4 text-white font-medium mt-4 flex flex-col justify-center items-center md:flex-row-reverse md:justify-between">
@@ -30,9 +33,17 @@ const Result = ({ user, score, setScore }) => {
         <p className="p-4 font-bold">Score: {score}</p>
         <p className="p-4 font-bold">Comment:{commentdb} </p>
       </div>
-      <button className=" p-2 bg-red-600" onClick={() => handleClick()}>
-        Click Me
-      </button>
+      <div>
+        <Link to={"/setquiz"}>
+          <Button
+            type={"submit"}
+            Children={"Retry"}
+            className={
+              "text-base font-bold border-2 bg-blue-950 border-white rounded-lg p-2 hover:bg-white hover:border-blue-950 hover:text-blue-950"
+            }
+          />
+        </Link>
+      </div>
     </div>
   );
 };

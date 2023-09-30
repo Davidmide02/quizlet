@@ -1,6 +1,5 @@
 import Button from "./button/button";
 import person from "../assets/undraw_quiz_re_aol4.svg";
-import Setquiz from "../setquiz";
 import { Link } from "react-router-dom";
 
 const Home = ({ setUser, user }) => {

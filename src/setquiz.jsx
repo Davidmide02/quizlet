@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import quesIcon from "/src/assets/undraw_questions_re_1fy7.svg";
 import { useState } from "react";
 
-const Setquiz = ({ setQuestionCategory }) => {
+const Setquiz = ({ setQuestionCategory, timeLeft, setTimeLeft }) => {
   const category = [
     {
       title: "General knowledge",
@@ -24,7 +24,7 @@ const Setquiz = ({ setQuestionCategory }) => {
       qs: "https://opentdb.com/api.php?amount=10&category=18&difficulty=easy&type=multiple",
     },
   ];
-  const timeNum = [1, 2, 3];
+  const timeNum = [10, 20, 30, 40];
 
   return (
     <div className="setquiz p-4 font-poppin h-screen">
@@ -70,14 +70,18 @@ const Setquiz = ({ setQuestionCategory }) => {
             </div>
 
             <div className="p-2 mx-4 flex items-center justify-between">
-              <p className="font-bold md:mr-2">Time in min</p>
+              <p className="font-bold md:mr-2">Time in sec</p>
               <select
                 name=""
                 id=""
                 className="text-white bg-blue-950 outline-none p-2"
+                onChange={(e) => {
+                  setTimeLeft(e.target.value);
+                  console.log(timeLeft);
+                }}
               >
                 {timeNum.map((num) => (
-                  <option key={num} onClick={() => {}}>
+                  <option key={num} value={num}>
                     {num}
                   </option>
                 ))}
