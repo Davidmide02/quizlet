@@ -19,9 +19,6 @@ const Question = ({
   const autoSubmit = (time) => {
     setTimeout(() => {
       navigate("/result");
-      //   console.log("hello");
-      //   console.log(time);
-      //   console.log(timeLeft);
     }, time * 1000);
   };
   // couunting submission time func
@@ -66,7 +63,6 @@ const Question = ({
   }, []);
 
   function handleNext(params) {
-    console.log(params);
     if (indexNum <= questions.length - 1) {
       // nested check
       if (indexNum == questions.length - 1) {
@@ -84,7 +80,6 @@ const Question = ({
   // trigger at every click of correct option
   function markCorrect() {
     setScore(score + 1);
-    // console.log(score);
   }
 
   if (questions !== null) {
@@ -126,9 +121,6 @@ const Question = ({
       </>
     );
   }
-  // else if (errMessage) {
-  //     return <NotFound />;
-  //   }
   else {
     return <h1 className="text-lg font-bold">Fetching questions....</h1>;
   }

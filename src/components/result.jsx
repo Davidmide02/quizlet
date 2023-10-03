@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import resultImage from "../assets/undraw_result_re_uj08.svg";
 import Button from "./button/button";
 import { Link } from "react-router-dom";
@@ -22,7 +22,7 @@ const Result = ({ user, score, setScore }) => {
       setCommentdb(commentBad[Math.floor(Math.random() * 3)]);
     }
   };
-  // handleComment(score);
+  useEffect(() => handleComment(score), []);
 
   return (
     <div className="result p-4 text-white font-medium mt-4 flex flex-col justify-center items-center md:flex-row-reverse md:justify-between">
