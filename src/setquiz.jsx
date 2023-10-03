@@ -58,7 +58,7 @@ const Setquiz = ({ setQuestionCategory, timeLeft, setTimeLeft }) => {
                 placeholder="category"
                 onChange={(e) => {
                   setQuestionCategory(e.target.value);
-                  console.log(e.target.value);
+                  // console.log(e.target.value);
                 }}
               >
                 {category.map((cate) => (
@@ -77,7 +77,7 @@ const Setquiz = ({ setQuestionCategory, timeLeft, setTimeLeft }) => {
                 className="text-white bg-blue-950 outline-none p-2"
                 onChange={(e) => {
                   setTimeLeft(e.target.value);
-                  console.log(timeLeft);
+                  // console.log(timeLeft);
                 }}
               >
                 {timeNum.map((num) => (

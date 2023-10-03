@@ -50,7 +50,7 @@ const Question = ({
         throw new Error("Can not fetch data");
       }
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       setQuestions(data.results);
     } catch (err) {
       setErrMessage(err);
