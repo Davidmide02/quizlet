@@ -31,7 +31,7 @@ const Result = ({ user, score, setScore }) => {
         <h1 className="text-2xl font-bold">Result</h1>
         <p className="p-4 font-bold">Name: {user}</p>
         <p className="p-4 font-bold">Score: {score}</p>
-        <p className="p-4 font-bold">Comment:{commentdb} </p>
+        <p className="p-4 font-bold">Comment: {commentdb} </p>
       </div>
       <div>
         <Link to={"/setquiz"}>
