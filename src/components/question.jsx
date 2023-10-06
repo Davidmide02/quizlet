@@ -73,7 +73,6 @@ const Question = ({
       return indexNum;
     } else {
       navigate("/result");
-    
     }
   }
 
@@ -120,8 +119,7 @@ const Question = ({
         ;
       </>
     );
-  }
-  else {
+  } else {
     return <h1 className="text-lg font-bold">Fetching questions....</h1>;
   }
 };

@@ -9,7 +9,7 @@ const Result = ({ user, score, setScore }) => {
   const commentBad = [
     "You no sabi book!",
     "Guyy, you be olodo!",
-    "Book you no know sabi!",
+    "Just give up on book!",
   ];
   const commentAverage = ["You try!", "Average!", "pass!"];
 
